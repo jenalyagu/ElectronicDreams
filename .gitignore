@@ -1,0 +1,7 @@
+.DS_Store
+
+# separate cloned repo (skill library)
+/ui-ux-pro-max-skill/
+
+# stray build output at root
+/.next/

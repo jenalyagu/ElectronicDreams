@@ -49,8 +49,9 @@ export default function BrandsPage() {
 
       <main id="main" className="pt-16">
         {/* ---- Hero ---- */}
-        <section className="spotlight circuit-grid relative overflow-hidden">
-          <div className="mx-auto max-w-6xl px-4 pb-14 pt-20 text-center sm:px-6 sm:pt-24">
+        <section className="spotlight relative overflow-hidden">
+          <div className="circuit-grid pointer-events-none absolute inset-0" aria-hidden />
+          <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-20 text-center sm:px-6 sm:pt-24">
             <Reveal>
               <p className="eyebrow mb-4">Brands We Trust</p>
               <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">

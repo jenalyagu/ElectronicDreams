@@ -69,8 +69,9 @@ export default async function CityPage({
 
       <main id="main" className="pt-16">
         {/* ---- Hero ---- */}
-        <section className="spotlight circuit-grid relative overflow-hidden">
-          <div className="mx-auto max-w-6xl px-4 pb-14 pt-20 sm:px-6 sm:pt-24">
+        <section className="spotlight relative overflow-hidden">
+          <div className="circuit-grid pointer-events-none absolute inset-0" aria-hidden />
+          <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-20 sm:px-6 sm:pt-24">
             <Reveal className="mx-auto max-w-3xl text-center">
               <p className="eyebrow mb-4 inline-flex items-center gap-1.5">
                 <MapPin className="size-3.5" aria-hidden />

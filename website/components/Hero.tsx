@@ -392,6 +392,12 @@ export default function Hero() {
     ? activeScene.src
     : (activeRoom.states && stateKey && activeRoom.states[stateKey]) ||
       activeRoom.frame;
+  /* Small screens get 4:5 art-directed crops (public/rooms/portrait/,
+     focal-pointed per room); rooms without a photo set keep their
+     landscape fallback frame. */
+  const toPortrait = (src: string) =>
+    src.startsWith("/rooms/") ? src.replace("/rooms/", "/rooms/portrait/") : src;
+
   /* Every possible background, stacked once (deduped — some states
      share a photo) so changes crossfade with no loading flash. */
   const allBackgrounds = [
@@ -419,6 +425,7 @@ export default function Hero() {
                lift the frame so more house, less sky */
             style={src.includes("backyard") ? { scale: 1.15, y: "-5%" } : undefined}
             fetchPriority={src === activeSrc ? "high" : "low"}
+                  loading={src === activeSrc ? undefined : "lazy"}
             initial={false}
             animate={{
               opacity: src === activeSrc ? 1 : 0,
@@ -479,24 +486,26 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Small screens: the room as a letterboxed live view. The
-              container is 12.8:9 — object-cover trims 10% from each
-              side of the 16:9 photo so it renders larger, while the
-              action (windows, shades, screen) stays in frame */}
+          {/* Small screens: the room as an immersive full-bleed strip —
+              edge to edge (negative margins escape the page padding),
+              cropped taller so it reads big while the action stays in
+              frame, and faded from the night background at the top and
+              back into it at the bottom, like the desktop hero. */}
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative mt-7 overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:hidden"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative -mx-4 mt-6 overflow-hidden sm:-mx-6 md:hidden"
           >
-            <div className="relative aspect-[64/45] w-full">
+            <div className="relative aspect-square w-full">
               {allBackgrounds.map((src) => (
                 <motion.img
-                  key={src}
-                  src={src}
+                  key={toPortrait(src)}
+                  src={toPortrait(src)}
                   alt=""
                   className="absolute inset-0 h-full w-full object-cover"
                   fetchPriority={src === activeSrc ? "high" : "low"}
+                  loading={src === activeSrc ? undefined : "lazy"}
                   initial={false}
                   animate={{
                     opacity: src === activeSrc ? 1 : 0,
@@ -508,6 +517,10 @@ export default function Hero() {
                   transition={{ duration: reduceMotion ? 0 : 1.1, ease: "easeInOut" }}
                 />
               ))}
+              {/* Night fades — the photo emerges from the dark page and
+                  melts back into it, no hard edges */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-night to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-night to-transparent" />
             </div>
           </motion.div>
 
@@ -517,7 +530,9 @@ export default function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.15 }}
-            className="mt-6 md:mt-10"
+            /* Mobile: the panel rides up over the photo's bottom fade so
+               the glass blur picks up the room behind it (desktop feel) */
+            className="relative -mt-16 md:mt-10"
           >
             <ControlPanel
               room={room}

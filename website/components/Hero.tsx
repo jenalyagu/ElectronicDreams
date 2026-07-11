@@ -446,7 +446,7 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div>
-          <motion.div variants={stagger} initial={initial} animate="visible">
+          <motion.div variants={stagger} initial={initial} animate="visible" className="md:mt-[3.75rem]">
             <motion.p variants={fadeUp} className="eyebrow mb-4 inline-flex items-center gap-2">
               <Sparkles className="size-3.5" aria-hidden />
               Houston · Control4 Gold Dealer · {SITE.yearsInBusiness}+ Years
@@ -454,28 +454,27 @@ export default function Hero() {
 
             {/* Each line rises out of a mask — the "screen powering on" moment.
                 (The slogan headline lives on the film's title card above.) */}
-            <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-5xl xl:text-6xl">
-              <span className="block overflow-hidden pb-[0.08em]">
+            <h1 className="font-display text-4xl font-bold leading-[0.95] tracking-tight md:text-5xl xl:text-6xl">
+              <span className="inline-block overflow-hidden pb-[0.08em] md:block">
                 <motion.span variants={lineReveal} className="block">
-                  Imagine your
+                  Electronic
                 </motion.span>
-              </span>
-              <span className="block overflow-hidden pb-[0.12em]">
+              </span>{" "}
+              <span className="inline-block overflow-hidden pb-[0.12em] md:block">
                 <motion.span variants={lineReveal} className="text-glow-gradient block">
-                  smart home.
+                  Dreams
                 </motion.span>
               </span>
             </h1>
 
             <motion.p
               variants={fadeUp}
-              className="mt-4 max-w-xl text-lg leading-relaxed text-ink-dim"
+              className="mt-4 max-w-xl text-lg leading-snug text-ink-dim"
             >
-              From the first design sketch to the service call years later,
-              one Houston team owns the whole system —{" "}
+              One Houston team designs, installs, and stands behind your
+              smart home system&mdash;
               <strong className="font-semibold text-ink">
-                and we&rsquo;ll take yours over, even if someone else installed
-                it.
+                even if someone else installed it.
               </strong>
             </motion.p>
 
@@ -532,7 +531,7 @@ export default function Hero() {
             transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.15 }}
             /* Mobile: the panel rides up over the photo's bottom fade so
                the glass blur picks up the room behind it (desktop feel) */
-            className="relative -mt-16 md:mt-10"
+            className="relative -mt-16 md:mt-[6.25rem]"
           >
             <ControlPanel
               room={room}

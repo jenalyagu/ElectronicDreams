@@ -162,7 +162,7 @@ function BeatCopy({
         {title}
       </p>
       {sub && (
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 [text-shadow:0_1px_14px_rgba(0,0,0,0.9)]">
+        <p className="mt-6 max-w-xl text-lg leading-snug text-white/85 [text-shadow:0_1px_14px_rgba(0,0,0,0.9)]">
           {sub}
         </p>
       )}

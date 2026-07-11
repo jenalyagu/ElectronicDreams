@@ -3,9 +3,9 @@
 [build]
   base = "website"
   command = "npm run build"
-  # Explicit publish path — overrides any UI value (a UI publish dir of
-  # "website" collides with the base dir and fails the Next.js plugin)
-  publish = "website/.next"
+  # Explicit publish path — overrides any UI value. NOTE: with a base
+  # set, this resolves RELATIVE TO THE BASE (= website/.next on disk)
+  publish = ".next"
 
 # Netlify's Next.js runtime: handles SSG output, redirects from
 # next.config.ts, image serving, and routing. Without this the deploy

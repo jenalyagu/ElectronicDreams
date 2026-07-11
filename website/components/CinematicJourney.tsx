@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   motion,
   useReducedMotion,
@@ -277,9 +277,29 @@ export default function CinematicJourney() {
     }
   });
 
-  /* Load frames: tier 1 = every 8th (scrub works fast), tier 2 = rest. */
+  /* Don't spend ~2.5MB of frames on visitors who never reach the film:
+     loading starts when the section is within one viewport of view. */
+  const [nearView, setNearView] = useState(false);
   useEffect(() => {
     if (reduceMotion) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNearView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "100% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduceMotion]);
+
+  /* Load frames: tier 1 = every 8th (scrub works fast), tier 2 = rest. */
+  useEffect(() => {
+    if (reduceMotion || !nearView) return;
     let cancelled = false;
     const dir = window.innerWidth <= 768 ? "hero-sm" : "hero";
 
@@ -311,7 +331,7 @@ export default function CinematicJourney() {
     return () => {
       cancelled = true;
     };
-  }, [draw, reduceMotion]);
+  }, [draw, reduceMotion, nearView]);
 
   /* Size the canvas to the viewport (device pixels, capped at 2×). */
   useEffect(() => {

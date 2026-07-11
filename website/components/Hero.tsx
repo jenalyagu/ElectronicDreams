@@ -160,7 +160,7 @@ function ControlPanel({
                     setTemp(roomTemp);
                   }}
                   aria-pressed={active}
-                  className={`flex min-w-0 flex-1 items-center justify-center gap-2 rounded-lg px-1 py-2 text-left transition-all duration-300 sm:flex-initial sm:justify-start sm:px-3 ${
+                  className={`flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-lg px-1 py-2 text-left transition-all duration-300 sm:min-h-0 sm:flex-initial sm:justify-start sm:px-3 ${
                     active
                       ? "border-2 border-signal bg-signal/20 text-signal"
                       : "border border-white/10 bg-white/5 text-gray-300 hover:bg-white/10"
@@ -191,7 +191,7 @@ function ControlPanel({
                   type="button"
                   onClick={() => onToggleControl(id)}
                   aria-pressed={active}
-                  className={`flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-1 py-2 text-[11px] font-medium transition-all duration-300 sm:flex-initial sm:px-3.5 sm:text-xs ${
+                  className={`flex min-h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-1 py-2 text-[11px] font-medium transition-all duration-300 sm:min-h-0 sm:flex-initial sm:px-3.5 sm:text-xs ${
                     active
                       ? "border border-signal bg-signal/25 text-signal"
                       : "border border-white/15 bg-white/5 text-gray-300 hover:bg-white/10"
@@ -226,7 +226,7 @@ function ControlPanel({
                   type="button"
                   onClick={() => onSceneToggle(scene.id)}
                   aria-pressed={active}
-                  className={`flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-1 py-2 text-[11px] font-medium transition-all duration-300 sm:flex-initial sm:px-3.5 sm:text-xs ${cls}`}
+                  className={`flex min-h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-1 py-2 text-[11px] font-medium transition-all duration-300 sm:min-h-0 sm:flex-initial sm:px-3.5 sm:text-xs ${cls}`}
                 >
                   <Icon className="hidden size-3.5 shrink-0 sm:block" aria-hidden />
                   <span className="truncate">{scene.label}</span>
@@ -268,7 +268,7 @@ function ControlPanel({
                 type="button"
                 onClick={() => setTemp((t) => Math.min(t + 1, 85))}
                 aria-label="Increase temperature"
-                className="flex size-6 items-center justify-center rounded-full bg-glow/20 text-xs text-glow transition-colors hover:bg-glow/40"
+                className="flex size-8 items-center justify-center rounded-full bg-glow/20 text-xs text-glow transition-colors hover:bg-glow/40 sm:size-6"
               >
                 +
               </button>
@@ -276,7 +276,7 @@ function ControlPanel({
                 type="button"
                 onClick={() => setTemp((t) => Math.max(t - 1, 60))}
                 aria-label="Decrease temperature"
-                className="flex size-6 items-center justify-center rounded-full bg-signal/20 text-xs text-signal transition-colors hover:bg-signal/40"
+                className="flex size-8 items-center justify-center rounded-full bg-signal/20 text-xs text-signal transition-colors hover:bg-signal/40 sm:size-6"
               >
                 &minus;
               </button>
@@ -288,7 +288,7 @@ function ControlPanel({
                   type="button"
                   onClick={() => setClimate(mode)}
                   aria-pressed={climate === mode}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 ${
+                  className={`min-h-11 rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 sm:min-h-0 ${
                     climate === mode
                       ? "border border-signal bg-signal/30 text-signal"
                       : "border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10"
@@ -301,6 +301,58 @@ function ControlPanel({
           </div>
         </motion.div>
       </div>
+    </div>
+  );
+}
+
+/** Design/fix CTAs + consultation link + service area. Rendered under
+    the copy on desktop and under the control panel on small screens. */
+function HeroCtas() {
+  return (
+    <div>
+      {/* Primary split: design vs. fix (magnetic on desktop) */}
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
+        <Magnetic className="w-full sm:w-auto">
+          <motion.a
+            href="#new-project"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="glow-cta flex w-full items-center justify-center gap-2 rounded-xl bg-glow px-7 py-4 text-base font-semibold text-glow-ink sm:w-auto"
+          >
+            <Sparkles className="size-5" aria-hidden />
+            Design my smart home
+          </motion.a>
+        </Magnetic>
+        <Magnetic className="w-full sm:w-auto">
+          <motion.a
+            href="/rescue-desk"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="glass flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-ink hover:border-signal/50 sm:w-auto"
+          >
+            <Wrench className="size-5 text-signal" aria-hidden />
+            Fix my system
+          </motion.a>
+        </Magnetic>
+      </div>
+
+      {/* Consultation CTA + service area, from the retired
+          "New projects & installations" panel */}
+      <a
+        href="#service-request"
+        onClick={() => prefillLeadForm({ issue: "new-project", supportType: "consult" })}
+        className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-ink-dim transition-colors hover:text-ink"
+      >
+        Book my free consultation — no pressure, just a plan and a number
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+      </a>
+
+      <p className="mt-2.5 text-sm text-ink-dim">
+        Serving {SITE.serviceAreas.slice(0, 5).join(", ")} &amp; the greater
+        Houston area
+      </p>
     </div>
   );
 }
@@ -354,8 +406,9 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden pb-16 pt-24 sm:pb-20 sm:pt-28">
       {/* The room itself — full-bleed photography behind the panel.
-          Toggles in the panel swap between real photos of each state. */}
-      <div aria-hidden className="absolute inset-0">
+          md and up: small screens get a letterboxed photo band in the
+          flow instead (Option A), so nothing covers the scene. */}
+      <div aria-hidden className="absolute inset-0 hidden md:block">
         {allBackgrounds.map((src) => (
           <motion.img
             key={src}
@@ -365,6 +418,7 @@ export default function Hero() {
             /* Backyard shots carry a lot of sky — scale up slightly and
                lift the frame so more house, less sky */
             style={src.includes("backyard") ? { scale: 1.15, y: "-5%" } : undefined}
+            fetchPriority={src === activeSrc ? "high" : "low"}
             initial={false}
             animate={{
               opacity: src === activeSrc ? 1 : 0,
@@ -393,7 +447,7 @@ export default function Hero() {
 
             {/* Each line rises out of a mask — the "screen powering on" moment.
                 (The slogan headline lives on the film's title card above.) */}
-            <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-5xl xl:text-6xl">
               <span className="block overflow-hidden pb-[0.08em]">
                 <motion.span variants={lineReveal} className="block">
                   Imagine your
@@ -418,54 +472,43 @@ export default function Hero() {
               </strong>
             </motion.p>
 
-            {/* Primary split: design vs. fix (magnetic on desktop) */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:gap-4"
-            >
-              <Magnetic className="w-full sm:w-auto">
-                <motion.a
-                  href="#new-project"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="glow-cta flex w-full items-center justify-center gap-2 rounded-xl bg-glow px-7 py-4 text-base font-semibold text-glow-ink sm:w-auto"
-                >
-                  <Sparkles className="size-5" aria-hidden />
-                  Design my smart home
-                </motion.a>
-              </Magnetic>
-              <Magnetic className="w-full sm:w-auto">
-                <motion.a
-                  href="/rescue-desk"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="glass flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-base font-semibold text-ink hover:border-signal/50 sm:w-auto"
-                >
-                  <Wrench className="size-5 text-signal" aria-hidden />
-                  Fix my system
-                </motion.a>
-              </Magnetic>
+            {/* md and up: CTAs under the copy. On small screens they
+                render below the panel instead (Option A stack). */}
+            <motion.div variants={fadeUp} className="mt-7 hidden md:block">
+              <HeroCtas />
             </motion.div>
+          </motion.div>
 
-            {/* Consultation CTA + service area, from the retired
-                "New projects & installations" panel */}
-            <motion.div variants={fadeUp}>
-              <a
-                href="#service-request"
-                onClick={() => prefillLeadForm({ issue: "new-project", supportType: "consult" })}
-                className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-ink-dim transition-colors hover:text-ink"
-              >
-                Book my free consultation — no pressure, just a plan and a number
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </a>
-            </motion.div>
-
-            <motion.p variants={fadeUp} className="mt-2.5 text-sm text-ink-dim">
-              Serving {SITE.serviceAreas.slice(0, 5).join(", ")} &amp; the
-              greater Houston area
-            </motion.p>
+          {/* Small screens: the room as a letterboxed live view. The
+              container is 12.8:9 — object-cover trims 10% from each
+              side of the 16:9 photo so it renders larger, while the
+              action (windows, shades, screen) stays in frame */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative mt-7 overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:hidden"
+          >
+            <div className="relative aspect-[64/45] w-full">
+              {allBackgrounds.map((src) => (
+                <motion.img
+                  key={src}
+                  src={src}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                  fetchPriority={src === activeSrc ? "high" : "low"}
+                  initial={false}
+                  animate={{
+                    opacity: src === activeSrc ? 1 : 0,
+                    filter:
+                      src === activeSrc && !activeRoom.states && !lit
+                        ? "brightness(0.38) saturate(0.7)"
+                        : "brightness(1) saturate(1)",
+                  }}
+                  transition={{ duration: reduceMotion ? 0 : 1.1, ease: "easeInOut" }}
+                />
+              ))}
+            </div>
           </motion.div>
 
           {/* Horizontal control bar below the copy — keeps the room
@@ -474,7 +517,7 @@ export default function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 22, delay: 0.15 }}
-            className="mt-10"
+            className="mt-6 md:mt-10"
           >
             <ControlPanel
               room={room}
@@ -516,8 +559,21 @@ export default function Hero() {
               className="mt-4 text-center text-sm text-ink-dim"
             >
               This panel is live — pick a room and flip its lights and shades;
-              the house behind it follows, the way your home would.
+              the house <span className="md:hidden">above</span>
+              <span className="hidden md:inline">behind it</span> follows, the
+              way your home would.
             </motion.p>
+          </motion.div>
+
+          {/* Small screens: CTAs below the panel, on the solid night
+              background (Option A stack) */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="mt-8 md:hidden"
+          >
+            <HeroCtas />
           </motion.div>
         </div>
       </div>

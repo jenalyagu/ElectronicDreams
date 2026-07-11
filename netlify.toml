@@ -1,0 +1,11 @@
+# Netlify configuration — lives in the repo so deploys don't depend on
+# dashboard settings. The site is the Next.js app in website/.
+[build]
+  base = "website"
+  command = "npm run build"
+
+# Netlify's Next.js runtime: handles SSG output, redirects from
+# next.config.ts, image serving, and routing. Without this the deploy
+# publishes raw .next build files and every URL 404s.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

@@ -363,7 +363,7 @@ export default function Hero() {
 
   /* Active room + toggles — they drive the full-bleed photo behind
      everything, so the whole hero IS the room being controlled. */
-  const [room, setRoom] = useState<RoomId>("kitchen");
+  const [room, setRoom] = useState<RoomId>("living");
   const [roomControls, setRoomControls] = useState<Record<RoomId, RoomControls>>(
     () =>
       Object.fromEntries(
@@ -373,7 +373,7 @@ export default function Hero() {
   /* One-tap scenes (Goodnight, Entertain…) override the state matrix;
      touching any toggle exits the scene. */
   const [sceneByRoom, setSceneByRoom] = useState<Record<RoomId, string | null>>({
-    living: null,
+    living: "active",
     kitchen: null,
     theater: null,
     backyard: null,
@@ -601,7 +601,7 @@ export default function Hero() {
               transition={{ delay: 1.9, duration: 0.6 }}
               className="mt-4 text-center text-sm text-ink-dim"
             >
-              This panel is live — pick a room and flip its lights and shades;
+              This panel is live — pick a room and tap a scene or control;
               the house <span className="md:hidden">above</span>
               <span className="hidden md:inline">behind it</span> follows, the
               way your home would.

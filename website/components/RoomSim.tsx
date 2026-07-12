@@ -9,6 +9,7 @@ import {
   MonitorPlay,
   MoonStar,
   Music2,
+  Palette,
   UtensilsCrossed,
   Waves,
   type LucideIcon,
@@ -90,12 +91,41 @@ export const ROOM_SIMS: {
   scenes?: RoomScene[];
 }[] = [
   {
+    // Four one-tap lighting scenes — no manual toggles; each swaps the
+    // full-bleed living-room photo. "Active" is the default warm scene.
     id: "living",
     name: "Living Room",
     icon: Home,
     temp: 72,
-    frame: "/sequence/hero-sm/frame-068.webp",
-    controls: ["lights", "shades", "music"],
+    frame: "/rooms/living-active.webp",
+    controls: [],
+    scenes: [
+      {
+        id: "active",
+        label: "Active",
+        icon: Lightbulb,
+        src: "/rooms/living-active.webp",
+        accent: "signal",
+      },
+      {
+        id: "rgb",
+        label: "RGB",
+        icon: Palette,
+        src: "/rooms/living-rgb.webp",
+      },
+      {
+        id: "movie-night",
+        label: "Movie Night",
+        icon: Clapperboard,
+        src: "/rooms/living-movie-night.webp",
+      },
+      {
+        id: "goodnight",
+        label: "Goodnight",
+        icon: MoonStar,
+        src: "/rooms/living-goodnight.webp",
+      },
+    ],
   },
   {
     id: "kitchen",

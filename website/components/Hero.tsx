@@ -378,6 +378,27 @@ export default function Hero() {
     theater: null,
     backyard: null,
   });
+  /* Perf/LCP: only the visible photo is needed for first paint. The
+     other room/state variants (preloaded for instant crossfades) are
+     mounted after the page goes idle, so they don't compete with the
+     hero's LCP image during load. */
+  const [showAllBackgrounds, setShowAllBackgrounds] = useState(false);
+  useEffect(() => {
+    if (reduceMotion) return;
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setShowAllBackgrounds(true), {
+        timeout: 2500,
+      });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const t = setTimeout(() => setShowAllBackgrounds(true), 1500);
+    return () => clearTimeout(t);
+  }, [reduceMotion]);
+
   const activeRoom = ROOM_SIMS.find((r) => r.id === room) ?? ROOM_SIMS[0];
   const rc = roomControls[room];
   const lit = room === "backyard" ? rc.path : rc.lights;
@@ -409,13 +430,21 @@ export default function Hero() {
     ),
   ];
 
+  /* Until the page is idle, mount only the active photo so the LCP
+     image loads alone; the rest fill in for instant crossfades. The
+     active src is always included so interactions before idle still
+     swap without a missing frame. */
+  const visibleBackgrounds = showAllBackgrounds
+    ? allBackgrounds
+    : allBackgrounds.filter((src) => src === activeSrc);
+
   return (
     <section className="relative overflow-hidden pb-16 pt-24 sm:pb-20 sm:pt-28">
       {/* The room itself — full-bleed photography behind the panel.
           md and up: small screens get a letterboxed photo band in the
           flow instead (Option A), so nothing covers the scene. */}
       <div aria-hidden className="absolute inset-0 hidden md:block">
-        {allBackgrounds.map((src) => (
+        {visibleBackgrounds.map((src) => (
           <motion.img
             key={src}
             src={src}
@@ -497,7 +526,7 @@ export default function Hero() {
             className="relative -mx-4 mt-6 overflow-hidden sm:-mx-6 md:hidden"
           >
             <div className="relative aspect-square w-full">
-              {allBackgrounds.map((src) => (
+              {visibleBackgrounds.map((src) => (
                 <motion.img
                   key={toPortrait(src)}
                   src={toPortrait(src)}

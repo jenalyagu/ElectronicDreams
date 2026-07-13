@@ -61,7 +61,8 @@ import { SERVICE_PAGES, type ServicePage as ServicePageData } from "@/lib/servic
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/fx/TiltCard";
 import ShadeSunScrubber from "@/components/ShadeSunScrubber";
-import LightingSceneSwitcher from "@/components/LightingSceneSwitcher";
+import SceneKeypad from "@/components/SceneKeypad";
+import { LIVING_LIGHTING_SCENES, THEATER_SCENES } from "@/lib/scene-demos";
 
 const ICONS: Record<string, LucideIcon> = {
   Activity, Armchair, AudioLines, BadgeCheck, BellRing, Blinds, Blocks, Boxes,
@@ -124,7 +125,7 @@ export default function ServicePage({ page }: { page: ServicePageData }) {
           className="border-y border-line/60 bg-abyss/40"
         >
           {/* Full-bleed room + floating keypad, above the caption */}
-          <LightingSceneSwitcher />
+          <SceneKeypad scenes={LIVING_LIGHTING_SCENES} roomLabel="Living Room" />
           <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
             <Reveal className="mx-auto max-w-2xl">
               <p className="eyebrow mb-3">See it in motion</p>
@@ -138,6 +139,33 @@ export default function ServicePage({ page }: { page: ServicePageData }) {
                 Tap a key and the whole room changes — warm for everyday, color
                 for a party, dim for movie night, a soft glow for bed. One
                 elegant keypad instead of a wall of switches.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Home Theater scene keypad ---- */}
+      {page.slug === "home-theater" && (
+        <section
+          aria-labelledby="theater-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed theater + floating keypad, above the caption */}
+          <SceneKeypad scenes={THEATER_SCENES} roomLabel="Theater" />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="theater-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                One touch, showtime
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Tap a key and the room becomes a cinema — house lights up,
+                motorized curtains that reveal the screen, then dim to a full
+                pitch-black movie night. No hunting for six remotes.
               </p>
             </Reveal>
           </div>

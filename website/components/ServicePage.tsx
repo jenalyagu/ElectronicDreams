@@ -60,6 +60,8 @@ import { SITE } from "@/lib/site";
 import { SERVICE_PAGES, type ServicePage as ServicePageData } from "@/lib/service-pages";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/fx/TiltCard";
+import ShadeSunScrubber from "@/components/ShadeSunScrubber";
+import LightingSceneSwitcher from "@/components/LightingSceneSwitcher";
 
 const ICONS: Record<string, LucideIcon> = {
   Activity, Armchair, AudioLines, BadgeCheck, BellRing, Blinds, Blocks, Boxes,
@@ -114,6 +116,61 @@ export default function ServicePage({ page }: { page: ServicePageData }) {
           </Reveal>
         </div>
       </section>
+
+      {/* ---- Interactive demo: Smart Lighting scene keypad ---- */}
+      {page.slug === "smart-lighting" && (
+        <section
+          aria-labelledby="lighting-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed room + floating keypad, above the caption */}
+          <LightingSceneSwitcher />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="lighting-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                One keypad, every scene
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Tap a key and the whole room changes — warm for everyday, color
+                for a party, dim for movie night, a soft glow for bed. One
+                elegant keypad instead of a wall of switches.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Climate & Shades whole-home scrubber ---- */}
+      {page.slug === "comfort" && (
+        <section
+          aria-labelledby="shade-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed home + floating panel, above the caption */}
+          <ShadeSunScrubber />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="shade-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                Your whole home, on one timeline
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Drag through an evening on a real install. The shades track the
+                setting sun, then the pool, spa, fireplace, and lighting come
+                alive on schedule — thermostat holding steady the whole time.
+                Set it once; the house handles the rest.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* ---- Feature grid ---- */}
       <section aria-labelledby="features-heading" className="py-16 sm:py-20">

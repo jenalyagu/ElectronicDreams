@@ -84,6 +84,8 @@ export const ROOM_SIMS: {
   temp: number;
   frame: string;
   controls: ControlId[];
+  /** Per-room chip label overrides (e.g. kitchen's Lights reads "Scenes") */
+  controlLabels?: Partial<Record<ControlId, string>>;
   /** Controls that drive the photo, in state-key order */
   photoControls?: ControlId[];
   /** Photo per control combination, keyed per `photoControls` */
@@ -134,6 +136,7 @@ export const ROOM_SIMS: {
     temp: 73,
     frame: "/sequence/hero-sm/frame-058.webp",
     controls: ["lights", "shades", "music"],
+    controlLabels: { lights: "Scenes" },
     photoControls: ["lights", "shades"],
     states: {
       "on-off": "/rooms/kitchen-lights-on-shades-open.webp",

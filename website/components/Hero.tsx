@@ -183,6 +183,8 @@ function ControlPanel({
             <div className="flex min-w-0 flex-1 items-center gap-1.5 sm:flex-wrap sm:gap-2">
             {(ROOM_SIMS.find((r) => r.id === room)?.controls ?? []).map((id) => {
               const meta = CONTROL_META[id];
+              const label =
+                ROOM_SIMS.find((r) => r.id === room)?.controlLabels?.[id] ?? meta.label;
               const active = controls[id];
               const Icon = meta.icon;
               return (
@@ -198,7 +200,7 @@ function ControlPanel({
                   }`}
                 >
                   <Icon className="hidden size-3.5 shrink-0 sm:block" aria-hidden />
-                  <span className="truncate">{meta.label}</span>
+                  <span className="truncate">{label}</span>
                   <span
                     aria-hidden
                     className={`size-1.5 rounded-full ${active ? "bg-ok" : "bg-gray-500"}`}

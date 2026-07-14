@@ -62,6 +62,9 @@ import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/fx/TiltCard";
 import ShadeSunScrubber from "@/components/ShadeSunScrubber";
 import SceneKeypad from "@/components/SceneKeypad";
+import MultiRoomAudio from "@/components/MultiRoomAudio";
+import RackReveal from "@/components/RackReveal";
+import CameraMosaic from "@/components/CameraMosaic";
 import { LIVING_LIGHTING_SCENES, THEATER_SCENES } from "@/lib/scene-demos";
 
 const ICONS: Record<string, LucideIcon> = {
@@ -166,6 +169,86 @@ export default function ServicePage({ page }: { page: ServicePageData }) {
                 Tap a key and the room becomes a cinema — house lights up,
                 motorized curtains that reveal the screen, then dim to a full
                 pitch-black movie night. No hunting for six remotes.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Safety & Security camera mosaic ---- */}
+      {page.slug === "safety-security" && (
+        <section
+          aria-labelledby="security-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          <CameraMosaic />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="security-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                Every camera, one glance
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Tap any feed to bring it full screen — crisp 4K day or night,
+                with locks, alerts, and recordings in the same app, wherever
+                you are.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Multi-room Audio zones ---- */}
+      {page.slug === "multi-room-audio" && (
+        <section
+          aria-labelledby="audio-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          <MultiRoomAudio />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="audio-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                Music that follows you
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Pick a room and the music moves with you — kitchen to living
+                room to patio, in perfect sync, from one app. The speakers
+                disappear into the ceiling; the sound doesn&rsquo;t.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Networking rack reveal ---- */}
+      {page.slug === "networking" && (
+        <section
+          aria-labelledby="rack-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed before/after wipe, above the caption */}
+          <RackReveal />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See the difference</p>
+              <h2
+                id="rack-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                The closet tells the truth
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Drag the handle — the same closet, before and after. A labeled
+                patch panel, enterprise PoE switch, and battery backup — built
+                so the next tech (or the next owner) can read it at a glance.
+                This is the invisible foundation everything else stands on.
               </p>
             </Reveal>
           </div>

@@ -35,8 +35,10 @@ function LazyOnView({
     const el = ref.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
-      setShow(true);
-      return;
+      // Ancient browser with no observer — just show it (deferred so we
+      // don't setState synchronously inside the effect body).
+      const t = setTimeout(() => setShow(true), 0);
+      return () => clearTimeout(t);
     }
     const io = new IntersectionObserver(
       (entries) => {

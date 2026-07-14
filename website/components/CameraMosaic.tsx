@@ -104,7 +104,7 @@ export default function CameraMosaic() {
           : {})}
         className={`group relative w-full overflow-hidden rounded-xl border text-left ${eased} ${
           kind === "hero"
-            ? "aspect-video border-glow/50 shadow-[0_0_34px_-8px_rgba(251,191,36,0.4)]"
+            ? "aspect-video border-scene/50 shadow-[0_0_34px_-8px_rgba(251,191,36,0.4)]"
             : "h-full min-h-0 border-white/15 hover:border-signal/60"
         }`}
       >
@@ -176,14 +176,14 @@ export default function CameraMosaic() {
       {/* status tiles */}
       <div className="grid grid-cols-2 gap-2.5">
         <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-          <div className="flex items-center gap-1.5 text-glow">
+          <div className="flex items-center gap-1.5 text-scene">
             <Cctv className="size-4" aria-hidden />
             <span className="text-[11px] font-semibold uppercase tracking-wide text-ink-dim">Cameras</span>
           </div>
           <p className="mt-1 font-display text-base font-semibold text-ink">6 live · 4K</p>
         </div>
         <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-          <div className="flex items-center gap-1.5 text-glow">
+          <div className="flex items-center gap-1.5 text-scene">
             <Lock className="size-4" aria-hidden />
             <span className="text-[11px] font-semibold uppercase tracking-wide text-ink-dim">Doors</span>
           </div>

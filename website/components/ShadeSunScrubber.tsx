@@ -215,13 +215,13 @@ export default function ShadeSunScrubber() {
               key={key}
               className={`rounded-xl border p-3 ${eased} ${
                 st.on
-                  ? "border-glow/30 bg-glow/[0.07]"
+                  ? "border-scene/30 bg-scene/[0.07]"
                   : "border-white/10 bg-white/[0.02]"
               }`}
             >
               <div className="flex items-center gap-1.5">
                 <Icon
-                  className={`size-4 ${st.on ? "text-glow" : "text-ink-dim"}`}
+                  className={`size-4 ${st.on ? "text-scene" : "text-ink-dim"}`}
                   aria-hidden
                 />
                 <span className="text-[11px] font-semibold uppercase tracking-wide text-ink-dim">
@@ -312,7 +312,7 @@ export default function ShadeSunScrubber() {
         <div className="absolute left-4 top-4 flex items-center gap-2.5 rounded-xl border border-white/15 bg-black/40 px-3.5 py-2 backdrop-blur-md sm:left-6 sm:top-6">
           <span
             aria-hidden
-            className="size-2 rounded-full bg-glow shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"
+            className="size-2 rounded-full bg-scene shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"
           />
           <span className="text-xs font-semibold uppercase tracking-wide text-ink">
             {stop.label}

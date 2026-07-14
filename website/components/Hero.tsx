@@ -61,7 +61,7 @@ const lineReveal: Variants = {
 type ClimateMode = "heat" | "cool" | "auto" | "off";
 
 const CLIMATE_MODES: Record<ClimateMode, { icon: typeof Flame; tone: string }> = {
-  heat: { icon: Flame, tone: "text-glow" },
+  heat: { icon: Flame, tone: "text-scene" },
   cool: { icon: Snowflake, tone: "text-signal" },
   auto: { icon: Wind, tone: "text-signal" },
   off: { icon: Thermometer, tone: "text-gray-400" },
@@ -107,7 +107,7 @@ function ControlPanel({
 
   return (
     <div
-      style={{ boxShadow: "0 0 90px -24px rgba(251, 191, 36, 0.3)" }}
+      style={{ boxShadow: "0 0 90px -24px rgba(30, 168, 255, 0.3)" }}
       className="relative rounded-3xl border border-white/15 bg-white/[0.03] p-5 shadow-2xl backdrop-blur-lg backdrop-saturate-150 sm:p-6"
     >
       {/* Glass sheen — kept faint so the room photo reads through */}
@@ -220,8 +220,8 @@ function ControlPanel({
                     ? "border border-signal bg-signal/25 text-signal"
                     : "border border-white/15 bg-white/5 text-gray-300 hover:bg-white/10"
                   : active
-                    ? "border border-glow bg-glow/25 text-glow shadow-[0_0_16px_rgba(251,191,36,0.25)]"
-                    : "border border-glow/30 bg-white/5 text-glow-soft/80 hover:bg-glow/10";
+                    ? "border border-scene bg-scene/25 text-scene shadow-[0_0_16px_rgba(251,191,36,0.25)]"
+                    : "border border-scene/30 bg-white/5 text-scene-soft/80 hover:bg-scene/10";
               return (
                 <button
                   key={scene.id}
@@ -270,7 +270,7 @@ function ControlPanel({
                 type="button"
                 onClick={() => setTemp((t) => Math.min(t + 1, 85))}
                 aria-label="Increase temperature"
-                className="flex size-8 items-center justify-center rounded-full bg-glow/20 text-xs text-glow transition-colors hover:bg-glow/40 sm:size-6"
+                className="flex size-8 items-center justify-center rounded-full bg-scene/20 text-xs text-scene transition-colors hover:bg-scene/40 sm:size-6"
               >
                 +
               </button>

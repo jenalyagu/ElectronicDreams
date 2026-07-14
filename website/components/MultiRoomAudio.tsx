@@ -67,7 +67,7 @@ function EqBars({ animate }: { animate: boolean }) {
       {[0.9, 0.5, 1, 0.65, 0.8].map((h, i) => (
         <span
           key={i}
-          className="w-[3px] rounded-full bg-glow"
+          className="w-[3px] rounded-full bg-scene"
           style={
             animate
               ? { height: "100%", animation: `eq-bounce 1.1s ease-in-out ${i * 0.17}s infinite`, transformOrigin: "bottom" }
@@ -166,11 +166,11 @@ export default function MultiRoomAudio() {
       </div>
 
       {/* Now Playing — follows the active room */}
-      <div className="mt-3.5 rounded-2xl border border-glow/40 bg-glow/[0.08] p-4 shadow-[0_0_20px_-6px_rgba(251,191,36,0.45)]">
+      <div className="mt-3.5 rounded-2xl border border-scene/40 bg-scene/[0.08] p-4 shadow-[0_0_20px_-6px_rgba(251,191,36,0.45)]">
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-glow/40 bg-night/60">
-              <Music2 className="size-5 text-glow" aria-hidden />
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-scene/40 bg-night/60">
+              <Music2 className="size-5 text-scene" aria-hidden />
             </span>
             <span className="min-w-0">
               <span className="block truncate font-display text-[15px] font-semibold leading-tight text-ink">
@@ -186,7 +186,7 @@ export default function MultiRoomAudio() {
         <div className="mt-3 flex items-center gap-2.5">
           <span className="font-mono text-[10px] tabular-nums text-ink-dim">1:24</span>
           <span className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/15">
-            <span className="absolute inset-y-0 left-0 w-[38%] rounded-full bg-glow" />
+            <span className="absolute inset-y-0 left-0 w-[38%] rounded-full bg-scene" />
           </span>
           <span className="font-mono text-[10px] tabular-nums text-ink-dim">3:41</span>
         </div>

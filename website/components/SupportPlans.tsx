@@ -33,7 +33,7 @@ export default function SupportPlans() {
               <div
                 className={`relative flex h-full flex-col rounded-2xl border p-7 ${
                   plan.featured
-                    ? "border-glow/50 bg-panel-2 shadow-[0_16px_48px_rgba(251,191,36,0.08)]"
+                    ? "border-glow/50 bg-panel-2 shadow-[0_16px_48px_rgba(30,168,255,0.08)]"
                     : "border-line bg-panel"
                 }`}
               >

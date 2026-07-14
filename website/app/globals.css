@@ -17,10 +17,16 @@
   --color-ink: #f2f5fa; /* primary text */
   --color-ink-dim: #9aa8c0; /* secondary text (≥4.5:1 on night) */
 
-  /* Brand accent — warm "theater glow" amber. CTA use only. */
-  --color-glow: #fbbf24;
-  --color-glow-soft: #fde68a;
-  --color-glow-ink: #1c1503; /* text on amber buttons */
+  /* Brand accent — Electronic Dreams logo blue. CTAs, text, links. */
+  --color-glow: #1ea8ff;
+  --color-glow-soft: #7cd9ff;
+  --color-glow-ink: #03142b; /* text on blue buttons */
+
+  /* Active-state highlight — warm amber for "on / selected / live"
+     indicators inside the interactive demos and hero scenes. */
+  --color-scene: #fbbf24;
+  --color-scene-soft: #fde68a;
+  --color-scene-ink: #1c1503;
 
   /* Support accent — signal blue for links / active states */
   --color-signal: #4cc3ff;
@@ -95,7 +101,7 @@ body::after {
     ),
     radial-gradient(
       ellipse 55% 45% at 72% 10%,
-      rgba(251, 191, 36, 0.09),
+      rgba(30, 168, 255, 0.09),
       transparent 55%
     );
 }
@@ -109,16 +115,16 @@ body::after {
   mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
 }
 
-/* Soft amber glow for the primary CTA */
+/* Soft blue glow for the primary CTA */
 .glow-cta {
   box-shadow:
-    0 0 0 1px rgba(251, 191, 36, 0.25),
-    0 4px 24px rgba(251, 191, 36, 0.22);
+    0 0 0 1px rgba(30, 168, 255, 0.25),
+    0 4px 24px rgba(30, 168, 255, 0.22);
 }
 .glow-cta:hover {
   box-shadow:
-    0 0 0 1px rgba(251, 191, 36, 0.4),
-    0 6px 32px rgba(251, 191, 36, 0.34);
+    0 0 0 1px rgba(30, 168, 255, 0.4),
+    0 6px 32px rgba(30, 168, 255, 0.34);
 }
 
 /* ============================================================
@@ -138,9 +144,9 @@ body::after {
   border: 1px solid rgba(154, 168, 192, 0.16);
 }
 
-/* Amber gradient headline accent */
+/* Blue gradient headline accent */
 .text-glow-gradient {
-  background: linear-gradient(100deg, #fde68a, #fbbf24 45%, #f59e0b);
+  background: linear-gradient(100deg, #7cd9ff, #1ea8ff 45%, #0080ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

@@ -98,7 +98,7 @@ export default function SceneKeypad({
               aria-pressed={on}
               className={`group flex items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-all duration-300 ${
                 on
-                  ? "border-glow/50 bg-glow/[0.1] shadow-[0_0_20px_-6px_rgba(251,191,36,0.5)]"
+                  ? "border-scene/50 bg-scene/[0.1] shadow-[0_0_20px_-6px_rgba(251,191,36,0.5)]"
                   : "border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.06]"
               }`}
             >
@@ -106,12 +106,12 @@ export default function SceneKeypad({
                 aria-hidden
                 className={`size-2.5 shrink-0 rounded-full ${eased} ${
                   on
-                    ? "bg-glow shadow-[0_0_9px_2px_rgba(251,191,36,0.7)]"
+                    ? "bg-scene shadow-[0_0_9px_2px_rgba(251,191,36,0.7)]"
                     : "bg-gray-600 group-hover:bg-gray-500"
                 }`}
               />
               <Icon
-                className={`size-5 shrink-0 ${on ? "text-glow" : "text-ink-dim"}`}
+                className={`size-5 shrink-0 ${on ? "text-scene" : "text-ink-dim"}`}
                 aria-hidden
               />
               <span className="min-w-0">
@@ -160,7 +160,7 @@ export default function SceneKeypad({
         <div className="absolute left-4 top-4 flex items-center gap-2.5 rounded-xl border border-white/15 bg-black/40 px-3.5 py-2 backdrop-blur-md sm:left-6 sm:top-6">
           <span
             aria-hidden
-            className="size-2 rounded-full bg-glow shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"
+            className="size-2 rounded-full bg-scene shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"
           />
           <span className="text-xs font-semibold uppercase tracking-wide text-ink">
             {scene.label}

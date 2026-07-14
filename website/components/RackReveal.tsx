@@ -120,7 +120,7 @@ export default function RackReveal() {
         <span className="pointer-events-none absolute left-4 top-4 rounded-md bg-black/55 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white/90 backdrop-blur-sm sm:left-6 sm:top-6">
           Before · what we inherited
         </span>
-        <span className="pointer-events-none absolute right-4 top-4 rounded-md border border-glow/40 bg-black/60 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-glow-soft backdrop-blur-sm sm:right-6 sm:top-6">
+        <span className="pointer-events-none absolute right-4 top-4 rounded-md border border-scene/40 bg-black/60 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-scene-soft backdrop-blur-sm sm:right-6 sm:top-6">
           After · the ED rack
         </span>
 
@@ -145,7 +145,7 @@ export default function RackReveal() {
               setPos((p) => Math.max(2, Math.min(98, p + (e.key === "ArrowLeft" ? -4 : 4))));
             }
           }}
-          className="absolute top-1/2 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full border-2 border-night bg-glow text-glow-ink shadow-[0_0_0_1px_rgba(251,191,36,0.5),0_0_20px_rgba(251,191,36,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow"
+          className="absolute top-1/2 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full border-2 border-night bg-scene text-scene-ink shadow-[0_0_0_1px_rgba(251,191,36,0.5),0_0_20px_rgba(251,191,36,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-scene"
           style={{ left: `${pos}%` }}
         >
           <ChevronsLeftRight className="size-5" aria-hidden />

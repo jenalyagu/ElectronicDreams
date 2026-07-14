@@ -163,7 +163,9 @@ export const ROOM_SIMS: {
     icon: Film,
     temp: 68,
     frame: "/sequence/hero-sm/frame-085.webp",
-    controls: ["lights", "screen", "curtains"],
+    // Button order: Lights, Curtains, Screen. photoControls keeps its own
+    // order — it defines the state-key layout below, don't reorder it.
+    controls: ["lights", "curtains", "screen"],
     photoControls: ["lights", "screen", "curtains"],
     states: {
       "on-off-off": "/rooms/theater-lights-on-blank.webp",

@@ -10,16 +10,12 @@ import { SERVICE_PAGES } from "@/lib/service-pages";
 
 /* Page links carry a `path`; homepage sections carry a hash + scrollspy id.
    Hashes are root-relative so they work from /rescue-desk etc. too.
-   The Services and Rescue Desk dropdowns are rendered separately.
+   The Services dropdown is rendered separately.
    (/brands is hidden for now — page still exists, just unlinked.) */
 const NAV_LINKS: { href: string; label: string; id?: string; path?: string }[] = [
+  { href: "/rescue-desk", path: "/rescue-desk", label: "Rescue Desk" },
+  { href: "/support-plans", path: "/support-plans", label: "Support Plans" },
   { href: "/#faq", id: "faq", label: "FAQ" },
-];
-
-/* Rescue Desk dropdown — the "fix & support" side of the business */
-const RESCUE_LINKS: { href: string; label: string }[] = [
-  { href: "/rescue-desk", label: "Smart Home Rescue Desk" },
-  { href: "/support-plans", label: "Support Plans" },
 ];
 
 /* Editorial nav typography — the upscale signature */
@@ -92,14 +88,10 @@ export default function Header() {
 
   const servicesActive =
     !!pathname && SERVICE_PAGES.some((s) => pathname === `/${s.slug}`);
-  const rescueActive =
-    !!pathname && RESCUE_LINKS.some((l) => pathname === l.href);
   const activeKey = servicesActive
     ? "services"
-    : rescueActive
-      ? "rescue"
-      : (NAV_LINKS.find((l) => (l.path ? pathname === l.path : activeId === l.id))
-          ?.href ?? null);
+    : (NAV_LINKS.find((l) => (l.path ? pathname === l.path : activeId === l.id))
+        ?.href ?? null);
   /* One gradient underline glides between the hovered item and glides
      home to the active one on mouse leave (motion layoutId). */
   const indicatorKey = hovered ?? activeKey;
@@ -183,59 +175,11 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Rescue Desk dropdown — same pattern as Services */}
-          <div className="group relative">
-            <button
-              type="button"
-              aria-haspopup="true"
-              aria-current={rescueActive ? "true" : undefined}
-              onMouseEnter={() => setHovered("rescue")}
-              onFocus={() => setHovered("rescue")}
-              className={`${NAV_ITEM_CLASS} ${
-                rescueActive
-                  ? "text-ink"
-                  : "text-ink-dim group-hover:text-ink group-focus-within:text-ink"
-              }`}
-            >
-              Rescue Desk
-              <ChevronDown
-                className="size-3.5 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180"
-                aria-hidden
-              />
-              <NavUnderline show={indicatorKey === "rescue"} />
-            </button>
-
-            <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-2 pt-5 opacity-0 transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-              <div className="glass overflow-hidden rounded-2xl p-3 shadow-[0_24px_64px_rgba(0,0,0,0.55)]">
-                <p className="px-3 pb-2 pt-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-dim/80">
-                  Fix, simplify & support
-                </p>
-                <ul className="space-y-0.5 border-t border-line/50 pt-2">
-                  {RESCUE_LINKS.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={`group/item relative block rounded-lg py-2.5 pl-5 pr-3 text-sm font-medium transition-colors hover:bg-white/[0.05] hover:text-ink ${
-                          pathname === link.href ? "text-glow" : "text-ink-dim"
-                        }`}
-                      >
-                        <span
-                          aria-hidden
-                          className="absolute left-2 top-1/2 h-4 w-px -translate-y-1/2 scale-y-0 bg-gradient-to-b from-glow to-signal transition-transform duration-300 group-hover/item:scale-y-100"
-                        />
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
           {NAV_LINKS.map((link) => {
             const active = link.path ? pathname === link.path : activeId === link.id;
+            const Tag = link.path ? Link : "a";
             return (
-              <a
+              <Tag
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "true" : undefined}
@@ -247,7 +191,7 @@ export default function Header() {
               >
                 {link.label}
                 <NavUnderline show={indicatorKey === link.href} />
-              </a>
+              </Tag>
             );
           })}
         </nav>
@@ -309,20 +253,6 @@ export default function Header() {
               className="block rounded-lg px-3 py-2.5 text-base font-medium text-ink-dim hover:bg-panel hover:text-ink"
             >
               {service.navLabel}
-            </Link>
-          ))}
-          <div className="my-2 border-t border-line/60" />
-          <p className="px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-dim">
-            Rescue Desk
-          </p>
-          {RESCUE_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="block rounded-lg px-3 py-2.5 text-base font-medium text-ink-dim hover:bg-panel hover:text-ink"
-            >
-              {link.label}
             </Link>
           ))}
           <div className="my-2 border-t border-line/60" />

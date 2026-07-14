@@ -96,6 +96,14 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "What makes a Gold Dealer different?",
         a: "Control4 tiers its dealers by certification, project volume, and customer satisfaction. Gold status with the Pinnacle distinction means factory-certified programmers and a track record Control4 itself audits — not a handyman with a dealer login.",
       },
+      {
+        q: "What does whole-home automation cost?",
+        a: "It scales with the home and the ambition — a single-room start costs a fraction of a full estate. Every project begins with a free in-home consultation and a written proposal, so you'll know the exact number before any work begins.",
+      },
+      {
+        q: "Someone else installed my system. Can you take it over?",
+        a: "Yes — rescuing orphaned systems is a specialty. We'll assess what you have, recover or rebuild the programming, and get it supported again, even if the original installer is long gone.",
+      },
     ],
     related: ["smart-lighting", "multi-room-audio", "safety-security"],
   },
@@ -159,6 +167,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Can I change the scenes myself later?",
         a: "Yes. The Control4 app lets you tune scenes, schedules, and timers yourself. For bigger changes, we handle most reprogramming remotely — no truck roll needed.",
+      },
+      {
+        q: "What happens to my lights if the internet goes out?",
+        a: "They keep working. Control4 lighting runs locally in the house — keypads, dimmers, and schedules don't depend on the cloud. You only lose remote access from outside until the connection returns.",
+      },
+      {
+        q: "Do smart dimmers work with my existing fixtures and LED bulbs?",
+        a: "Almost always. Control4 dimmers replace your current switches and drive the fixtures you already own; we verify LED compatibility during the design walk-through so nothing flickers or hums after install.",
       },
     ],
     related: ["whole-home-automation", "comfort", "safety-security"],
@@ -224,6 +240,14 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Is this different from buying a few Sonos speakers?",
         a: "Portable speakers are great — until you want sound in ten rooms, no clutter on the counters, and one system the whole family can run. Architectural audio is built into the home, sounds dramatically better, and adds value that moves with the house.",
       },
+      {
+        q: "Can everyone listen to something different at the same time?",
+        a: "Yes — every zone is independent. Jazz in the study, a podcast in the kitchen, cartoons in the game room, all at once; then one tap groups the whole first floor for a party, in perfect sync.",
+      },
+      {
+        q: "Will outdoor speakers survive Houston weather?",
+        a: "The ones we install will. Landscape and patio speakers are engineered for heat, humidity, and rain, and we aim and tune them to fill your backyard without broadcasting to the neighbors.",
+      },
     ],
     related: ["home-theater", "whole-home-automation", "networking"],
   },
@@ -287,6 +311,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Can you upgrade the theater I already have?",
         a: "Absolutely — and often for far less than a rebuild. A new projector, receiver, or control system can make a 2015-era theater feel new without touching the walls. We service and upgrade theaters other companies installed, too.",
+      },
+      {
+        q: "I don't have a spare room — dedicated theater or media room?",
+        a: "A media room. We build living-room cinemas with serious picture and surround sound that disappear when the credits roll — hidden speakers, a display that fits the room, and lighting that resets itself. If you later finish out a dedicated space, everything carries forward.",
+      },
+      {
+        q: "Will my family actually be able to run it?",
+        a: "That's the design goal. One remote (or one button labeled \"Movie\") starts the projector, drops the shades, dims the lights, and sets the sound — no input-switching ritual. If grandma can't start a movie, we haven't finished the job.",
       },
     ],
     related: ["multi-room-audio", "comfort", "whole-home-automation"],
@@ -352,6 +384,14 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Will this actually lower my energy bill?",
         a: "In Houston, yes — solar heat gain through windows is a major AC load. Shades that track the sun plus climate schedules routinely trim summer usage, and you'll feel the comfort difference immediately.",
       },
+      {
+        q: "How are motorized shades powered?",
+        a: "Two ways: discreet battery motors that install with no wiring at all, or wired shades for new construction and remodels where we can hide the power completely. We'll recommend the right mix window by window during the comfort audit.",
+      },
+      {
+        q: "Can the shades and thermostat work together on their own?",
+        a: "Yes — that's where the magic is. Shades drop automatically as the afternoon sun swings around, the thermostat eases off while you're out, and one \"Goodnight\" scene closes the house down. You set the routine once; the house runs it daily.",
+      },
     ],
     related: ["smart-lighting", "whole-home-automation", "safety-security"],
   },
@@ -415,6 +455,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Can my cameras and alarm join my smart home?",
         a: "That's the point. Security on Control4 means the alarm, locks, lights, and shades act together — arming at night, simulating occupancy on vacation, and flashing lights on an alarm event instead of living in a separate app.",
+      },
+      {
+        q: "What happens if the power or internet goes out?",
+        a: "The system is built for it: battery backup keeps the alarm alive through an outage, and monitored systems report over cellular — not just your Wi-Fi — so a cut line doesn't mean a blind house.",
+      },
+      {
+        q: "Can you take over cameras or an alarm another company installed?",
+        a: "Usually, yes. Quality IP cameras and standard alarm panels can often be folded into the new system instead of landfilled. We'll assess what's worth keeping during the security walkthrough — you only replace what actually needs replacing.",
       },
     ],
     related: ["intercom-anywhere", "smart-lighting", "networking"],
@@ -480,6 +528,14 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Why not just use the router from my internet provider?",
         a: "ISP routers are built for a couple of laptops, not for 4K streams, camera recording, and dozens of smart devices at once. Enterprise gear handles the load, reaches the whole property, and can be monitored and fixed remotely.",
       },
+      {
+        q: "Do I have to change internet providers?",
+        a: "No. We work with whatever service you have — fiber, cable, or fixed wireless. Your provider's modem hands off to our network, and everything from the router inward is built, secured, and supported by us.",
+      },
+      {
+        q: "Why do my cameras and smart gadgets need their own network?",
+        a: "Segmentation keeps a cheap IoT gadget or a guest's laptop from ever touching your personal computers and files. Cameras, guests, and smart devices each live in their own lane — it's the difference between a home network and a back door.",
+      },
     ],
     related: ["whole-home-automation", "safety-security", "multi-room-audio"],
   },
@@ -543,6 +599,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Does it work when I'm out of the country?",
         a: "Yes. With 4Sight, distance doesn't matter — answer the door and check the house from anywhere with an internet connection.",
+      },
+      {
+        q: "Can intercom be added to my existing Control4 system?",
+        a: "Yes — if you already run Control4, the video doorbell and touch screens drop right into the system you have. It's one of the most popular upgrades for existing clients.",
+      },
+      {
+        q: "Is it simple enough for the kids to use?",
+        a: "That's half the fun. Touch screens make room-to-room calls with a tap — \"dinner's ready\" reaches the game room without anyone shouting up the stairs — and the interface is the same one the family already uses for lights and music.",
       },
     ],
     related: ["safety-security", "whole-home-automation", "networking"],

@@ -65,6 +65,8 @@ import SceneKeypad from "@/components/SceneKeypad";
 import MultiRoomAudio from "@/components/MultiRoomAudio";
 import RackReveal from "@/components/RackReveal";
 import CameraMosaic from "@/components/CameraMosaic";
+import WholeHomeScenes from "@/components/WholeHomeScenes";
+import VideoIntercom from "@/components/VideoIntercom";
 import { LIVING_LIGHTING_SCENES, THEATER_SCENES } from "@/lib/scene-demos";
 
 const ICONS: Record<string, LucideIcon> = {
@@ -120,6 +122,60 @@ export default function ServicePage({ page }: { page: ServicePageData }) {
           </Reveal>
         </div>
       </section>
+
+      {/* ---- Interactive demo: Whole-home scene orchestration ---- */}
+      {page.slug === "whole-home-automation" && (
+        <section
+          aria-labelledby="wholehome-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed house + floating scene panel, above the caption */}
+          <WholeHomeScenes />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="wholehome-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                One tap, the whole house responds
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                Pick a scene and watch every system move together — lights,
+                shades, climate, music, security, even the fireplace. That&rsquo;s
+                the difference between smart devices and a smart home.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ---- Interactive demo: Video intercom answer flow ---- */}
+      {page.slug === "intercom-anywhere" && (
+        <section
+          aria-labelledby="intercom-demo-heading"
+          className="border-y border-line/60 bg-abyss/40"
+        >
+          {/* Full-bleed doorbell view + floating call panel, above the caption */}
+          <VideoIntercom />
+          <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20">
+            <Reveal className="mx-auto max-w-2xl">
+              <p className="eyebrow mb-3">See it in motion</p>
+              <h2
+                id="intercom-demo-heading"
+                className="font-display text-3xl font-bold tracking-tight"
+              >
+                Answer the door from anywhere
+              </h2>
+              <p className="mt-4 leading-snug text-ink-dim">
+                The doorbell rings and you see who&rsquo;s there — talk to the
+                courier, light the porch, unlock the door for a moment, and lock
+                it behind them. All from the couch, the office, or the airport.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* ---- Interactive demo: Smart Lighting scene keypad ---- */}
       {page.slug === "smart-lighting" && (

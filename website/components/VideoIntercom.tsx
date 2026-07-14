@@ -87,20 +87,24 @@ export default function VideoIntercom() {
     return () => { io.disconnect(); timers.forEach(clearTimeout); };
   }, [reduceMotion]);
 
-  const touch = (fn: () => void) => () => {
+  function handleAction(id: string) {
     touched.current = true;
-    fn();
-  };
-
-  const answer = touch(() => { setRinging(false); setTalking(true); });
-  const toggleLight = touch(() => setLightOn((v) => !v));
-  const unlock = touch(() => { setRinging(false); setUnlocked(true); });
-  const dismiss = touch(() => {
-    setTalking(false);
-    setUnlocked(false);
-    setLightOn(false);
-    setRinging(true); // the courier tries again — demo resets
-  });
+    if (id === "talk") {
+      setRinging(false);
+      setTalking(true);
+    } else if (id === "unlock") {
+      setRinging(false);
+      setUnlocked(true);
+    } else if (id === "light") {
+      setLightOn((v) => !v);
+    } else {
+      // dismiss — the courier tries again, so the demo resets
+      setTalking(false);
+      setUnlocked(false);
+      setLightOn(false);
+      setRinging(true);
+    }
+  }
 
   const eased = reduceMotion ? "" : "transition-all duration-700 ease-out";
 
@@ -109,12 +113,11 @@ export default function VideoIntercom() {
     label: string;
     icon: typeof Mic;
     on: boolean;
-    onClick: () => void;
   }[] = [
-    { id: "talk", label: talking ? "Talking" : "Talk", icon: Mic, on: talking, onClick: answer },
-    { id: "unlock", label: unlocked ? "Unlocked" : "Unlock", icon: unlocked ? LockOpen : Lock, on: unlocked, onClick: unlock },
-    { id: "light", label: "Porch Light", icon: Lamp, on: lightOn, onClick: toggleLight },
-    { id: "dismiss", label: "Dismiss", icon: PhoneOff, on: false, onClick: dismiss },
+    { id: "talk", label: talking ? "Talking" : "Talk", icon: Mic, on: talking },
+    { id: "unlock", label: unlocked ? "Unlocked" : "Unlock", icon: unlocked ? LockOpen : Lock, on: unlocked },
+    { id: "light", label: "Porch Light", icon: Lamp, on: lightOn },
+    { id: "dismiss", label: "Dismiss", icon: PhoneOff, on: false },
   ];
 
   const panel = (
@@ -174,11 +177,11 @@ export default function VideoIntercom() {
 
       {/* Call actions */}
       <div className="mt-3 grid grid-cols-2 gap-2">
-        {actions.map(({ id, label, icon: Icon, on, onClick }) => (
+        {actions.map(({ id, label, icon: Icon, on }) => (
           <button
             key={id}
             type="button"
-            onClick={onClick}
+            onClick={() => handleAction(id)}
             aria-pressed={on}
             className={`flex min-h-11 items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
               on

@@ -1,17 +1,21 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import CinematicJourney from "@/components/CinematicJourney";
 import TrustBar from "@/components/TrustBar";
 import ChoosePath from "@/components/ChoosePath";
 // import SupportSystem from "@/components/SupportSystem"; // hidden for now
 // import Services from "@/components/Services"; // hidden for now (film covers "What we do")
 // import WhyCall from "@/components/WhyCall"; // hidden for now
-import SceneBuilder from "@/components/SceneBuilder";
 // import ProjectCTA from "@/components/ProjectCTA"; // retired — its copy + CTA moved into the Hero
 import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
-import ServiceRequestForm from "@/components/ServiceRequestForm";
 import Footer from "@/components/Footer";
+// Below-the-fold heavy client sections — code-split and mounted on scroll
+// (see components/LazySections.tsx) to keep them off the first-load path.
+import {
+  CinematicJourneyLazy,
+  SceneBuilderLazy,
+  ServiceRequestFormLazy,
+} from "@/components/LazySections";
 
 /**
  * HOMEPAGE — section order is the conversion funnel:
@@ -30,14 +34,14 @@ export default function HomePage() {
         <Hero />
         <TrustBar />
         <ChoosePath />
-        <CinematicJourney />
+        <CinematicJourneyLazy />
         {/* <SupportSystem /> — hidden for now */}
         {/* <Services /> — hidden for now (film covers "What we do") */}
         {/* <WhyCall /> — hidden for now */}
-        <SceneBuilder />
+        <SceneBuilderLazy />
         <Reviews />
         <FAQ />
-        <ServiceRequestForm />
+        <ServiceRequestFormLazy />
       </main>
 
       <Footer />

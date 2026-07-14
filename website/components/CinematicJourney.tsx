@@ -355,7 +355,6 @@ export default function CinematicJourney() {
   if (reduceMotion) {
     return (
       <section
-        id="top"
         aria-label="A scroll-through film of a smart home we built"
         className="relative"
       >
@@ -386,7 +385,6 @@ export default function CinematicJourney() {
 
   return (
     <section
-      id="top"
       ref={sectionRef}
       aria-label="A scroll-through film of a smart home we built"
       className="relative bg-abyss"

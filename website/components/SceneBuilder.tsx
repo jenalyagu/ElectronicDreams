@@ -98,7 +98,6 @@ export default function SceneBuilder() {
 
   return (
     <section
-      id="new-project"
       aria-labelledby="scene-builder-heading"
       className="border-y border-line/60 bg-abyss/50 py-20 sm:py-24"
     >

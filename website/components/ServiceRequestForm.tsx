@@ -472,7 +472,6 @@ export default function ServiceRequestForm() {
 function FormShell({ children }: { children: React.ReactNode }) {
   return (
     <section
-      id="service-request"
       aria-labelledby="service-request-heading"
       className="border-t border-line/60 bg-abyss/50 py-20 sm:py-24"
     >

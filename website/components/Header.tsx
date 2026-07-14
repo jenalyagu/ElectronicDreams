@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
-import { ChevronDown, Menu, X, Phone, Zap } from "lucide-react";
+import { ChevronDown, Menu, X, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { SERVICE_PAGES } from "@/lib/service-pages";
 
@@ -109,14 +109,15 @@ export default function Header() {
           scrolled ? "h-16" : "h-[4.5rem]"
         }`}
       >
-        {/* Logo — swap for an <Image /> when you have a logo file */}
-        <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.name} — home`}>
-          <span className="grid size-8 place-items-center rounded-lg bg-glow/15 text-glow ring-1 ring-inset ring-glow/25">
-            <Zap className="size-4.5" aria-hidden />
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            Electronic<span className="text-glow"> Dreams</span>
-          </span>
+        <Link href="/" className="flex items-center" aria-label={`${SITE.name} — home`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/ed-logo.png"
+            alt="Electronic Dreams"
+            width={441}
+            height={128}
+            className="h-14 w-auto [filter:drop-shadow(0_1px_2px_rgba(0,0,0,0.9))_drop-shadow(0_3px_10px_rgba(0,0,0,0.55))]"
+          />
         </Link>
 
         <nav

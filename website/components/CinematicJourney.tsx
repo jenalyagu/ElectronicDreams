@@ -11,7 +11,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import Link from "next/link";
-import { Check, Sparkles, Wrench } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Wrench } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { SERVICES } from "@/lib/content";
 
@@ -44,9 +44,21 @@ const framePath = (i: number, dir: "hero" | "hero-sm" = "hero") =>
     Each service is timed to the footage that shows it. */
 const service = (icon: string) => SERVICES.find((s) => s.icon === icon);
 
+/** Each film service beat links to its matching service (or rescue) page.
+    Keyed by the SERVICES icon name the beat is built from. */
+const SERVICE_LINKS: Record<string, { href: string; label: string }> = {
+  House: { href: "/whole-home-automation", label: "Explore Smart Home Automation" },
+  Clapperboard: { href: "/home-theater", label: "Explore Home Theater" },
+  Music4: { href: "/multi-room-audio", label: "Explore Whole-Home Audio" },
+  ShieldCheck: { href: "/safety-security", label: "Explore Security & Cameras" },
+  Router: { href: "/networking", label: "Explore Networking & Wi-Fi" },
+  LifeBuoy: { href: "/rescue-desk", label: "Explore Support & Rescue" },
+};
+
 /** Builds a beat from a SERVICES entry (found by its icon name). */
 const serviceBeat = (icon: string, from: number, to: number) => {
   const s = service(icon);
+  const link = SERVICE_LINKS[icon];
   return {
     from,
     to,
@@ -54,6 +66,8 @@ const serviceBeat = (icon: string, from: number, to: number) => {
     sub: s?.description,
     bullets: s?.bullets,
     logos: s?.logos,
+    href: link?.href,
+    linkLabel: link?.label,
   };
 };
 
@@ -65,6 +79,8 @@ const BEATS: {
   sub?: string;
   bullets?: string[];
   logos?: { src: string; alt: string }[];
+  href?: string;
+  linkLabel?: string;
   cta?: boolean;
 }[] = [
   {
@@ -145,12 +161,16 @@ function BeatCopy({
   sub,
   bullets,
   logos,
+  href,
+  linkLabel,
 }: {
   eyebrow?: string;
   title: string;
   sub?: string;
   bullets?: string[];
   logos?: { src: string; alt: string }[];
+  href?: string;
+  linkLabel?: string;
 }) {
   return (
     <>
@@ -194,6 +214,15 @@ function BeatCopy({
             />
           ))}
         </div>
+      )}
+      {href && (
+        <Link
+          href={href}
+          className="glass mt-7 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-signal/50 sm:text-base"
+        >
+          {linkLabel ?? "Explore this service"}
+          <ArrowRight className="size-4 text-signal" aria-hidden />
+        </Link>
       )}
     </>
   );
@@ -429,7 +458,7 @@ export default function CinematicJourney() {
             progress={progress}
             from={beat.from}
             to={beat.to}
-            interactive={beat.cta}
+            interactive={beat.cta || !!beat.href}
           >
             <BeatCopy
               eyebrow={beat.eyebrow}
@@ -437,6 +466,8 @@ export default function CinematicJourney() {
               sub={beat.sub}
               bullets={beat.bullets}
               logos={beat.logos}
+              href={beat.cta ? undefined : beat.href}
+              linkLabel={beat.linkLabel}
             />
             {beat.cta && <CtaButtons fix={beat.from !== 0} />}
           </Beat>

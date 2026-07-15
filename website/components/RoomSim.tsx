@@ -72,9 +72,10 @@ export type RoomScene = {
   /** Control states the scene implies — applied to the toggles when it
       engages, so the chips never contradict the photo. */
   sets?: Partial<RoomControls>;
-  /** Chip color: "glow" (amber scene styling) or "signal" to match the
-      standard control chips. Defaults to "glow". */
-  accent?: "glow" | "signal";
+  /** Chip color: "glow" (amber scene styling), "signal" to match the
+      standard control chips, "rgb" for a color-spectrum chip, or
+      "purple" for a soft night-purple chip. Defaults to "glow". */
+  accent?: "glow" | "signal" | "rgb" | "purple";
 };
 
 export const ROOM_SIMS: {
@@ -86,6 +87,9 @@ export const ROOM_SIMS: {
   controls: ControlId[];
   /** Per-room chip label overrides (e.g. kitchen's Lights reads "Scenes") */
   controlLabels?: Partial<Record<ControlId, string>>;
+  /** Turning a control ON forces these controls OFF (e.g. the theater
+      screen opens the curtains; backyard house lights raise the shades) */
+  excludes?: Partial<Record<ControlId, ControlId[]>>;
   /** Controls that drive the photo, in state-key order */
   photoControls?: ControlId[];
   /** Photo per control combination, keyed per `photoControls` */
@@ -114,6 +118,7 @@ export const ROOM_SIMS: {
         label: "RGB",
         icon: Palette,
         src: "/rooms/living-rgb.webp",
+        accent: "rgb",
       },
       {
         id: "movie-night",
@@ -126,6 +131,7 @@ export const ROOM_SIMS: {
         label: "Goodnight",
         icon: MoonStar,
         src: "/rooms/living-goodnight.webp",
+        accent: "purple",
       },
     ],
   },
@@ -166,6 +172,8 @@ export const ROOM_SIMS: {
     // Button order: Lights, Curtains, Screen. photoControls keeps its own
     // order — it defines the state-key layout below, don't reorder it.
     controls: ["lights", "curtains", "screen"],
+    // The screen can't show through closed curtains — engaging it opens them
+    excludes: { screen: ["curtains"] },
     photoControls: ["lights", "screen", "curtains"],
     states: {
       "on-off-off": "/rooms/theater-lights-on-blank.webp",
@@ -195,6 +203,9 @@ export const ROOM_SIMS: {
     temp: 82,
     frame: "/sequence/hero-sm/frame-000.webp",
     controls: ["path", "shades"],
+    controlLabels: { path: "House Lights" },
+    // House lights are for enjoying the view — turning them on opens the shades
+    excludes: { path: ["shades"] },
     photoControls: ["path", "shades"],
     states: {
       "on-off": "/rooms/backyard-lights-on-shades-open.webp",

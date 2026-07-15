@@ -219,9 +219,17 @@ function ControlPanel({
                   ? active
                     ? "border border-signal bg-signal/25 text-signal"
                     : "border border-white/15 bg-white/5 text-gray-300 hover:bg-white/10"
-                  : active
-                    ? "border border-scene bg-scene/25 text-scene shadow-[0_0_16px_rgba(251,191,36,0.25)]"
-                    : "border border-scene/30 bg-white/5 text-scene-soft/80 hover:bg-scene/10";
+                  : scene.accent === "rgb"
+                    ? active
+                      ? "border border-fuchsia-400/70 bg-[linear-gradient(100deg,rgba(239,68,68,0.32),rgba(217,70,239,0.32),rgba(59,130,246,0.32),rgba(34,197,94,0.32))] text-ink shadow-[0_0_16px_rgba(217,70,239,0.4)]"
+                      : "border border-fuchsia-400/30 bg-[linear-gradient(100deg,rgba(239,68,68,0.10),rgba(217,70,239,0.10),rgba(59,130,246,0.10),rgba(34,197,94,0.10))] text-gray-300 hover:border-fuchsia-400/50 hover:text-ink"
+                    : scene.accent === "purple"
+                      ? active
+                        ? "border border-purple-400 bg-purple-500/25 text-purple-300 shadow-[0_0_16px_rgba(168,85,247,0.4)]"
+                        : "border border-purple-400/30 bg-white/5 text-purple-200/70 hover:bg-purple-500/10 hover:text-purple-200"
+                      : active
+                        ? "border border-scene bg-scene/25 text-scene shadow-[0_0_16px_rgba(251,191,36,0.25)]"
+                        : "border border-scene/30 bg-white/5 text-scene-soft/80 hover:bg-scene/10";
               return (
                 <button
                   key={scene.id}
@@ -571,10 +579,19 @@ export default function Hero() {
               onToggleControl={(control) => {
                 /* touching a manual control exits any running scene */
                 setSceneByRoom((prev) => ({ ...prev, [room]: null }));
-                setRoomControls((prev) => ({
-                  ...prev,
-                  [room]: { ...prev[room], [control]: !prev[room][control] },
-                }));
+                setRoomControls((prev) => {
+                  const turningOn = !prev[room][control];
+                  const next = { ...prev[room], [control]: turningOn };
+                  /* room exclusions: engaging one control can force
+                     others off (screen opens curtains, house lights
+                     raise the shades) */
+                  if (turningOn) {
+                    for (const off of activeRoom.excludes?.[control] ?? []) {
+                      next[off] = false;
+                    }
+                  }
+                  return { ...prev, [room]: next };
+                });
               }}
               activeSceneId={sceneByRoom[room]}
               onSceneToggle={(sceneId) => {
